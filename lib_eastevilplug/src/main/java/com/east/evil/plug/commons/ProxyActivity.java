@@ -9,13 +9,13 @@ import androidx.databinding.ViewDataBinding;
 
 import com.east.evil.huxlyn.commons.EastViewModel;
 import com.east.evil.huxlyn.entity.VMData;
+import com.east.evil.plug.R;
 import com.east.evil.plug.entity.PluginApk;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ProxyActivity<V extends ViewDataBinding, D extends EastViewModel<? extends VMData>>
-        extends BaseEastEvilActivity<V,D>{
+public class ProxyActivity extends BaseEastEvilActivity<ViewDataBinding, ProxyViewModel>{
 
     private static final String TAG = "ProxyActivity==>";
 
@@ -72,12 +72,12 @@ public class ProxyActivity<V extends ViewDataBinding, D extends EastViewModel<? 
 
     @Override
     public int getLayoutRes() {
-        return 0;
+        return R.layout.activity_proxy;
     }
 
     @NotNull
     @Override
-    public Class<D> getVMClass() {
-        return null;
+    public Class<ProxyViewModel> getVMClass() {
+        return ProxyViewModel.class;
     }
 }
