@@ -1,0 +1,3 @@
+include ':lib_eastevilplug'
+include ':app'
+rootProject.name = "EastEvilPlug"
