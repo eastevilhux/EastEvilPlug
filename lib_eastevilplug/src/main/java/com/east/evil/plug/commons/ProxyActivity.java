@@ -11,10 +11,12 @@ import com.east.evil.huxlyn.commons.EastViewModel;
 import com.east.evil.huxlyn.entity.VMData;
 import com.east.evil.plug.entity.PluginApk;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-abstract public class ProxyActivity<V extends ViewDataBinding, D extends EastViewModel<? extends VMData>>
-        extends BaseEastEvilActivity<V,D> implements IEastEvilPlugin{
+public class ProxyActivity<V extends ViewDataBinding, D extends EastViewModel<? extends VMData>>
+        extends BaseEastEvilActivity<V,D>{
+
     private static final String TAG = "ProxyActivity==>";
 
     private String mClassName = null;
@@ -66,5 +68,16 @@ abstract public class ProxyActivity<V extends ViewDataBinding, D extends EastVie
     @Override
     public ClassLoader getClassLoader() {
         return mPluginApk != null ? mPluginApk.getMClassLoader() : super.getClassLoader();
+    }
+
+    @Override
+    public int getLayoutRes() {
+        return 0;
+    }
+
+    @NotNull
+    @Override
+    public Class<D> getVMClass() {
+        return null;
     }
 }
