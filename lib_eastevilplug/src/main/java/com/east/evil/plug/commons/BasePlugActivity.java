@@ -6,7 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.east.evil.huxlyn.commons.EastViewModel;
 import com.east.evil.huxlyn.entity.VMData;
@@ -42,6 +44,18 @@ abstract public class BasePlugActivity<V extends ViewDataBinding, D extends East
         if (mFrom == IEastEvilPlugin.FROM_INTERNAL) {
             mProxyActivity = this;
             onCreate(saveInstanceState);
+        }else{
+            dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());
+            ViewModelProvider vp = new ViewModelProvider(
+                    this,
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
+            );
+            viewModel = vp.get(getVMClass());
+            viewModel.setLifecycleOwner(this);
+            getLifecycle().addObserver(viewModel);
+            dataBinding.setLifecycleOwner(this);
+            viewModel.initModel();
+            initView();
         }
     }
 
