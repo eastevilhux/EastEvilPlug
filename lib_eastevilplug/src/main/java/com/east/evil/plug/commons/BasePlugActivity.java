@@ -45,14 +45,13 @@ abstract public class BasePlugActivity<V extends ViewDataBinding, D extends East
             mProxyActivity = this;
             onCreate(saveInstanceState);
         }else{
-            dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());
-            ViewModelProvider vp = new ViewModelProvider(
-                    this,
-                    ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
+            dataBinding = DataBindingUtil.setContentView(mProxyActivity, getLayoutRes());
+            ViewModelProvider vp = new ViewModelProvider(mProxyActivity,
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(mProxyActivity.getApplication())
             );
             viewModel = vp.get(getVMClass());
             viewModel.setLifecycleOwner(this);
-            getLifecycle().addObserver(viewModel);
+            mProxyActivity.getLifecycle().addObserver(viewModel);
             dataBinding.setLifecycleOwner(this);
             viewModel.initModel();
             initView();
