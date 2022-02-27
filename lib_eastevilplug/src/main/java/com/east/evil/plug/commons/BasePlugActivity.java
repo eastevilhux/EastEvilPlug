@@ -52,7 +52,7 @@ abstract public class BasePlugActivity<V extends ViewDataBinding, D extends East
             viewModel = vp.get(getVMClass());
             viewModel.setLifecycleOwner(this);
             mProxyActivity.getLifecycle().addObserver(viewModel);
-            dataBinding.setLifecycleOwner(this);
+            dataBinding.setLifecycleOwner(mProxyActivity);
             viewModel.initModel();
             initView();
         }
